@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Cursos em 1 - Conhecimento Completo em TI</title>
+    <style>
+        :root {
+            --primary-color: #004080;
+            --secondary-color: #0078d7;
+            --accent-color: #ff6600;
+            --light-bg: #f5f9ff;
+            --dark-bg: #001f40;
+            --text-color: #333333;
+            --light-text: #ffffff;
+        }
+        
+        .timer-section {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .timer-box {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+        
+        .timer-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+        
+        .timer-message {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+        
+        .faq-section {
+            padding: 4rem 0;
+            background-color: var(--light-bg);
+        }
+        
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+        }
+        
+        .faq-question {
+            padding: 1.2rem;
+            background-color: #f1f1f1;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .faq-question:after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+        
+        .faq-question.active:after {
+            content: '-';
+        }
+        
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            line-height: 1.6;
+        }
+        
+        .faq-answer-content {
+            padding: 1rem 0 1.5rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .price-tag {
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 0.5rem 2rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .cta-button:hover {
+            background-color: #ff8533;
+            transform: scale(1.05);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .benefits {
+            background-color: var(--light-bg);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .benefits h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .benefits-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .benefit-item {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-item i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .courses {
+            padding: 4rem 0;
+        }
+        
+        .courses h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+        
+        .course-card {
+            border: 1px solid #e1e1e1;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-header {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .course-content {
+            padding: 2rem;
+        }
+        
+        .course-content h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-topics {
+            margin-top: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .course-topics li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .cta-section {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .guarantee {
+            background-color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .guarantee-box {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        
+        .guarantee h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .course-details {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        
+        .accordion {
+            background-color: #f1f1f1;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .accordion:after {
+            content: '+';
+            font-size: 18px;
+            float: right;
+            margin-left: 5px;
+        }
+        
+        .active:after {
+            content: '-';
+        }
+        
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        
+        .buy-now-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .buy-now-footer .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .course-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                font-size: 1.2rem;
+                padding: 0.8rem 2rem;
+            }
+            
+            .price-tag {
+                font-size: 1.5rem;
+            }
+            
+            .buy-now-footer {
+                flex-direction: column;
+            }
+            
+            .buy-now-footer .price {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>4 Cursos Completos em 1 Pacote</h1>
+            <p class="tagline">Torne-se um especialista em Windows, segurança e manutenção de computadores</p>
+            <div class="price-tag">Apenas R$ 14,90</div>
+            <a href="https://go.perfectpay.com.br/PPU38CPNPGT" class="cta-button">QUERO APROVEITAR AGORA!</a>
+        </div>
+    </header>
+    
+    <section class="benefits">
+        <div class="container">
+            <h2>O Que Você Vai Aprender</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <h3>Otimização Avançada</h3>
+                    <p>Aprenda a deixar qualquer computador muito mais rápido, livre de vírus e otimizado para máximo desempenho.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Segurança Digital</h3>
+                    <p>Técnicas de proteção contra malwares, ransomware e como criar backups à prova de ataques.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Instalação Profissional</h3>
+                    <p>Formatação e instalação do Windows 10 e 11 da maneira correta, com todas as configurações essenciais.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Habilidades Avançadas</h3>
+                    <p>Se torne um técnico mais qualificado e aprenda a aumentar seu lucro por cliente de forma ética e eficiente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="courses">
+        <div class="container">
+            <h2>4 Cursos Completos Incluídos</h2>
+            <div class="course-list">
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Manutenção Total de Windows</h3>
+                    </div>
+                    <div class="course-content">
+                        <p>O melhor curso para profissionais de TI de micro, pequena e média empresa se atualizarem sobre a interação do Windows com software e hardware.</p>
+                        
+                        <button class="accordion">Ver Conteúdo do Curso</button>
+                        <div class="panel">
+                            <div class="course-details">
+                                <h4>Tópicos Importantes:</h4>
+                                <ul class="course-topics">
+                                    <li>Como deixar seu computador muito mais rápido e sem vírus</li>
+                                    <li>10 dicas para evitar que seu computador volte a ficar lento</li>
+                                    <li>Compreender o funcionamento da CPU, Vídeo, RAM e Disco</li>
+                                    <li>Dicas para manter o Windows sempre otimizado e seguro</li>
+                                    <li>Detecção e solução de gargalos de CPU, RAM, DISCO e REDE</li>
+                                    <li>Como Processos, Threads e Identificadores atuam no Windows</li>
+                                    <li>Otimização de programas via Prioridade e Afinidade</li>
+                                    <li>Tela Azul da Morte (BSOD)</li>
+                                    <li>Visualizador de Eventos</li>
+                                    <li>Otimização de BIOS e UEFI</li>
+                                    <li>Recuperação de vários GB de espaço em disco</li>
+                                    <li>Backup e Restauração</li>
+                                    <li>Aulas detalhadas sobre malwares</li>
+                                    <li>Ransomware: como evitar e proteger seus backups</li>
+                                    <li>Como monitorar e prevenir ataques internos</li>
+                                    <li>Como criar um honeypot (isca) para detectar ransomware</li>
+                                    <li>Como criar backups à prova de ransomware</li>
+                                    <li>Otimização do Windows Server</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Windows 10 da Formatação à Produtividade</h3>
+                    </div>
+                    <div class="course-content">
+                        <p>Curso exclusivo que aborda a configuração da BIOS/UEFI, formatação, instalação e configuração do Windows 10 da maneira correta.</p>
+                        
+                        <button class="accordion">Ver Conteúdo do Curso</button>
+                        <div class="panel">
+                            <div class="course-details">
+                                <h4>Aulas Incluídas:</h4>
+                                <ul class="course-topics">
+                                    <li>Aula 01: Introdução + BIOS/UEFI + Segurança do Windows sob UEFI</li>
+                                    <li>Aula 02: Configuração básica BIOS/UEFI</li>
+                                    <li>Aula 03: MBR e GPT</li>
+                                    <li>Aula 04: HDD, SSD e Formatação</li>
+                                    <li>Aula 05: Instalação do Windows 10 - configurações iniciais</li>
+                                    <li>Aula 06: Tarefas iniciais importantes</li>
+                                    <li>Aula 07: Instalação do Windows 10 - configurações básicas e personalização</li>
+                                    <li>Aula 08: Instalação do Windows 10 - configurações de segurança</li>
+                                    <li>Aula 09: Instalação do Windows 10 - configurações avançadas de segurança</li>
+                                    <li>Aula 10: BitLocker</li>
+                                    <li>Aula 11: Windows Sandbox</li>
+                                    <li>Aula 12-15: Programas adicionais e configurações</li>
+                                    <li>Aula 16: 31 dicas de Produtividade</li>
+                                    <li>Aula 17: Reparação/Restauração e solução de problemas</li>
+                                    <li>Aula 18: Backup e Restauração</li>
+                                    <li>Aula 19: Clonagem de HD/SSD</li>
+                                    <li>Aula 20: Pastas e Processos do Windows</li>
+                                    <li>Aula 21: Erros a serem evitados e Considerações Finais</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Windows 11: da Formatação à Produtividade</h3>
+                    </div>
+                    <div class="course-content">
+                        <p>Curso prático completo que aborda instalação e configuração avançada do Windows 11, com 31 dicas de produtividade.</p>
+                        
+                        <button class="accordion">Ver Conteúdo do Curso</button>
+                        <div class="panel">
+                            <div class="course-details">
+                                <h4>Aulas Incluídas:</h4>
+                                <ul class="course-topics">
+                                    <li>Aula 01: Introdução | BIOS/UEFI | Segurança do Windows sob UEFI (11:08)</li>
+                                    <li>Aula 02: Configuração básica BIOS/UEFI (4:49)</li>
+                                    <li>Aula 03: MBR/GPT (6:13)</li>
+                                    <li>Aula 04: Instalação do Windows 11 em hardware compatível (11:19)</li>
+                                    <li>Aula 05: Instalação do Windows 11 em hardware incompatível (16:01)</li>
+                                    <li>Aula 06: 5 Tarefas iniciais importantes (9:22)</li>
+                                    <li>Aula 07: Configurações iniciais e personalização do Windows 11 (32:34)</li>
+                                    <li>Aula 08: Configurações de segurança e Microsoft Defender (7:59)</li>
+                                    <li>Aula 09: Configurações avançadas de segurança (12:21)</li>
+                                    <li>Aula 10-13: BitLocker, Área Restrita e Kaspersky</li>
+                                    <li>Aula 14-16: Programas essenciais e configurações</li>
+                                    <li>Aula 17: 31 dicas de Produtividade (44:50)</li>
+                                    <li>Aula 18: Reparação/Restauração e Solução de Problemas (14:56)</li>
+                                    <li>Aula 19-21: Backup, Restauração e Clonagem</li>
+                                    <li>Aula 22: Aplicações Android no Windows 11 (7:33)</li>
+                                    <li>Aula 23: Integração do Windows com smartphones (6:35)</li>
+                                    <li>Aula 24: Erros a serem evitados e Considerações Finais (11:49)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Aperfeiçoamento para Técnicos de Informática 2.0</h3>
+                    </div>
+                    <div class="course-content">
+                        <p>Perfeito para quem quer aumentar seu conhecimento e habilidade em detectar e solucionar problemas no Windows.</p>
+                        
+                        <button class="accordion">Ver Conteúdo do Curso</button>
+                        <div class="panel">
+                            <div class="course-details">
+                                <h4>Módulos Incluídos:</h4>
+                                <ul class="course-topics">
+                                    <li>MÓDULO 1 | Tarefas Iniciais</li>
+                                    <li>MÓDULO 2 | Travamento</li>
+                                    <li>MÓDULO 3 | Segurança</li>
+                                    <li>MÓDULO 4 | Windows</li>
+                                    <li>MÓDULO 5 | Análise técnica de problemas e erros</li>
+                                    <li>MÓDULO 6 | Como aumentar seu lucro</li>
+                                </ul>
+                                <p>Este curso ensina profissionais de TI a aumentarem seu lucro por cliente de maneira simples e eficiente, tornando-se profissionais muito mais qualificados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="timer-section">
+        <div class="container">
+            <h2>Oferta por Tempo Limitado!</h2>
+            <p class="timer-message">Esta oferta especial expira em:</p>
+            <div class="timer-container">
+                <div class="timer-box">
+                    <div class="timer-number" id="minutes">30</div>
+                    <div class="timer-label">minutos</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-number" id="seconds">00</div>
+                    <div class="timer-label">segundos</div>
+                </div>
+            </div>
+            <p class="timer-message" style="margin-top: 1.5rem;">Não perca esta oportunidade única!</p>
+            <a href="https://go.perfectpay.com.br/PPU38CPNPGT" class="cta-button">GARANTIR AGORA!</a>
+        </div>
+    </section>
+
+    <section class="preview-section">
+        <div class="container">
+            <h2>Veja uma Demonstração das Aulas</h2>
+            <div class="video-container">
+                <iframe width="100%" height="500" src="https://www.youtube.com/embed/VMl1o97xJFs" title="Demonstração do Curso" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="preview-text">Este é apenas um pequeno trecho do vasto conteúdo que você terá acesso ao adquirir o pacote com os 4 cursos completos.</p>
+        </div>
+    </section>
+
+    <section class="guarantee">
+        <div class="container">
+            <div class="guarantee-box">
+                <h2>Garantia de Satisfação</h2>
+                <p>Tenha acesso a todos os 4 cursos completos com uma única compra. Se não ficar satisfeito com o conteúdo, devolvemos seu dinheiro em até 7 dias.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">1. Quais são os pré-requisitos para o curso?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            É recomendado ter conhecimentos básicos de informática, mas não é obrigatório ter experiência prévia em T.I.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">2. O curso é online ou presencial?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            O curso é 100% online. Será liberado um link para download das aulas.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">3. Qual é a duração do curso?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            O curso tem mais de 30h, possui mais de 20gb de material para estudo.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">4. Posso fazer o curso pelo celular?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Sim, você pode baixar o conteúdo e assistir às aulas pelo celular.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">5. Posso ter acesso vitalício ao curso?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Sim, você poderá ter o curso baixado no seu PC ou celular para o resto da vida.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container">
+            <h2>Transforme Sua Carreira em TI</h2>
+            <p>Tenha acesso imediato a estes 4 cursos completos, com mais de 50 horas de conteúdo prático que vai elevar seu conhecimento em Windows, segurança e manutenção de computadores ao próximo nível.</p>
+            <a href="https://go.perfectpay.com.br/PPU38CPNPGT" class="cta-button">ADQUIRIR AGORA POR APENAS R$ 14,90</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <div class="buy-now-footer">
+        <div class="price">Apenas R$ 14,90</div>
+        <a href="https://go.perfectpay.com.br/PPU38CPNPGT" class="cta-button">COMPRAR AGORA</a>
+    </div>
+    
+    <script>
+        // Accordion functionality
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+        
+        // FAQ functionality
+        var faqQuestions = document.getElementsByClassName("faq-question");
+        
+        for (i = 0; i < faqQuestions.length; i++) {
+            faqQuestions[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var answer = this.nextElementSibling;
+                if (answer.style.maxHeight) {
+                    answer.style.maxHeight = null;
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        }
+        
+        // Countdown Timer
+        function startTimer(duration, minutesDisplay, secondsDisplay) {
+            var timer = duration, minutes, seconds;
+            
+            // Update immediately at start
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            
+            minutesDisplay.textContent = minutes < 10 ? "0" + minutes : minutes;
+            secondsDisplay.textContent = seconds < 10 ? "0" + seconds : seconds;
+            
+            var countdownInterval = setInterval(function () {
+                timer--;
+                
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                
+                minutesDisplay.textContent = minutes < 10 ? "0" + minutes : minutes;
+                secondsDisplay.textContent = seconds < 10 ? "0" + seconds : seconds;
+                
+                if (timer <= 0) {
+                    clearInterval(countdownInterval);
+                    // Optionally redirect or show a "time's up" message
+                }
+                
+            }, 1000);
+        }
+        
+        window.onload = function() {
+            var thirtyMinutes = 30 * 60; // 30 minutes in seconds
+            var minutesDisplay = document.getElementById("minutes");
+            var secondsDisplay = document.getElementById("seconds");
+            startTimer(thirtyMinutes, minutesDisplay, secondsDisplay);
+            
+            // Open FAQ items if URL has #faq hash
+            if(window.location.hash === "#faq") {
+                setTimeout(function() {
+                    document.getElementById('faq').scrollIntoView();
+                }, 100);
+            }
+        };
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
